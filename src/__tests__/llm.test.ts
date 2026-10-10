@@ -285,6 +285,7 @@ test("getPanelDiagnostics keeps only stop reason and numeric usage", () => {
 		usage: {
 			input: 321,
 			output: 2048,
+			reasoning: 1234,
 			cacheRead: 10,
 			cacheWrite: 20,
 			totalTokens: 2399,
@@ -295,7 +296,8 @@ test("getPanelDiagnostics keeps only stop reason and numeric usage", () => {
 	eq(diagnostics, {
 		stop_reason: "length",
 		truncated: true,
-		usage: { input: 321, output: 2048, cache_read: 10, cache_write: 20, total: 2399 },
+		usage: { input: 321, output: 2048, reasoning: 1234, cache_read: 10, cache_write: 20, total: 2399 },
 	}, "diagnostics project numeric usage and the stop reason");
+	eq(getPanelDiagnostics({ ...message, usage: { ...message.usage, reasoning: 0 } }).usage?.reasoning, 0, "zero reasoning usage is retained");
 	if (JSON.stringify(diagnostics).includes("SECRET")) throw new Error("diagnostics must not retain reasoning content");
 });

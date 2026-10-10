@@ -546,6 +546,7 @@ test("panel system prompt states the configured budget and asks for a concise le
 	const prompt = buildPanelSystemPrompt(8192, false);
 	if (!prompt.includes("8192")) throw new Error("prompt must state the configured budget");
 	if (prompt.includes("2048")) throw new Error("prompt must not hardcode the default budget");
+	if (!prompt.includes("reasoning tokens may share this cap")) throw new Error("prompt must reserve budget for visible answer text");
 	if (!/verdict or direct answer/i.test(prompt)) throw new Error("prompt must ask for a verdict/direct answer first");
 	if (!/comfortably below the cap/i.test(prompt)) throw new Error("prompt must ask to stay well under the cap");
 	if (!prompt.includes('"OK"')) throw new Error("prompt must honor exact short-format requests");

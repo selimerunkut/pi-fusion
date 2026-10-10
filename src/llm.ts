@@ -357,6 +357,7 @@ export function getPanelDiagnostics(message: AssistantMessage): PanelResponseDia
 		? {
 			input: message.usage.input,
 			output: message.usage.output,
+			...(typeof message.usage.reasoning === "number" ? { reasoning: message.usage.reasoning } : {}),
 			cache_read: message.usage.cacheRead,
 			cache_write: message.usage.cacheWrite,
 			total: message.usage.totalTokens,

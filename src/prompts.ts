@@ -23,7 +23,7 @@ export function buildPanelSystemPrompt(maxOutputTokens: number, withTools: boole
 	const base = withTools ? PANEL_SYSTEM_PROMPT_WITH_TOOLS : PANEL_SYSTEM_PROMPT;
 	return `${base}
 
-Output budget: this response is capped at roughly ${maxOutputTokens} output tokens. Lead with a concise verdict or direct answer first, then include only the supporting detail that matters, and stop comfortably below the cap rather than filling it. If the user asks for an exact format or a specific short reply (for example, answer with exactly "OK"), return only that. Do not pad to use the budget, and do not claim to have counted tokens precisely.`;
+Output budget: this response is capped at roughly ${maxOutputTokens} output tokens. Depending on the provider, reasoning tokens may share this cap; reserve enough budget for visible answer text. Lead with a concise verdict or direct answer first, then include only the supporting detail that matters, and stop comfortably below the cap rather than filling it. If the user asks for an exact format or a specific short reply (for example, answer with exactly "OK"), return only that. Do not pad to use the budget, and do not claim to have counted tokens precisely.`;
 }
 
 export const JUDGE_SYSTEM_PROMPT = `You are a critical judge comparing responses from a panel of AI models.

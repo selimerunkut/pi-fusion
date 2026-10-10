@@ -135,6 +135,8 @@ export interface PanelToolUsage {
 export interface PanelUsage {
 	input: number;
 	output: number;
+	/** Reasoning-token count when reported; never reasoning text. */
+	reasoning?: number;
 	cache_read: number;
 	cache_write: number;
 	total: number;
